@@ -10,6 +10,8 @@ class CategoryController extends GetxController {
   }
 
   ApiResponse _categoryApiResponse = ApiResponse();
+
+  
   set categoryApiResponse(ApiResponse response) {
     _categoryApiResponse = response;
     update();

@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:go_fresha/core/di/core_bindings.dart';
 import 'package:go_fresha/core/presentation/routes/app_pages.dart';
 import 'package:go_fresha/feature/auth/presentation/screen/login_screen.dart';
+import 'package:go_fresha/feature/shared/layouts/service_card.dart';
 
 void main() {
   runApp(GetMaterialApp(
-    // home: LoginScreen(),
-    getPages: AppPages.routes,
+    home: ServiceCard(
+      categoryModel: null,
+    ),
+    // getPages: AppPages.routes,
     initialRoute: AppPages.initial,
   ));
 }

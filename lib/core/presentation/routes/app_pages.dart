@@ -10,8 +10,10 @@ import 'package:go_fresha/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:go_fresha/feature/home/di/home_bindings.dart';
 import 'package:go_fresha/feature/home/presentation/widgets/category.dart';
 import 'package:go_fresha/feature/home/presentation/widgets/home_carousal.dart';
+import 'package:go_fresha/feature/services/di/service_binding.dart';
 
 import '../../../feature/auth/di/auth_bindings.dart';
+import '../../../trys.dart';
 
 part 'app_routes.dart';
 
@@ -33,10 +35,14 @@ class AppPages {
     GetPage(
         name: _Paths.categories,
         page: Categories.new,
-        bindings: [CoreBindings(), CategoryBindings()]),
+        bindings: [CoreBindings(), CategoryBindings(), ServiceBinding()]),
     GetPage(
         name: _Paths.carousal,
         page: HomeCarousal.new,
+        bindings: [CoreBindings(), AuthBindings(), HomeBindings()]),
+    GetPage(
+        name: _Paths.servicesListingScreen,
+        page: ()=>ListingScrensss(filterQueryParams: Get.arguments,),
         bindings: [CoreBindings(), AuthBindings(), HomeBindings()])
   ];
 }

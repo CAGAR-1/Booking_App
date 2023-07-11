@@ -5,10 +5,13 @@ enum APIPath {
   //HOME//
   imageSlider,
   category
+  // According to Category
+  ,
+  accordingToCategory
 }
 
 class APIPathHelper {
-  static const String baseUrl = "http://192.168.1.4/go_fresha_backend";
+  static const String baseUrl = "http://192.168.1.3/go_fresha_backend";
   static String authAPIs(APIPath path, {String? keyword}) {
     switch (path) {
       case APIPath.login:
@@ -25,6 +28,8 @@ class APIPathHelper {
         return "/get_PackageAndOffer.php";
       case APIPath.category:
         return "/getCategories.php";
+      case APIPath.accordingToCategory:
+        return "/getAccordingToCategory.php";
 
       default:
         return "";

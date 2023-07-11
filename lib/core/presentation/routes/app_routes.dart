@@ -6,6 +6,7 @@ abstract class Routes {
   static const dashboard = _Paths.dashboard;
   static const carousal = _Paths.carousal;
   static const categories = _Paths.categories;
+  static const servicesListingScreen = _Paths.servicesListingScreen;
 }
 
 abstract class _Paths {
@@ -13,4 +14,6 @@ abstract class _Paths {
   static const dashboard = '/dashboard';
   static const carousal = '/carousal';
   static const categories = '/categories';
+  static const servicesListingScreen = '/servicesListingScreen';
+
 }

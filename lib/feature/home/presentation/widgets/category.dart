@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_fresha/core/presentation/routes/app_pages.dart';
 import 'package:go_fresha/core/presentation/widgets/base_widget.dart';
 import 'package:go_fresha/core/presentation/widgets/cached_network_image_builder.dart';
+import 'package:go_fresha/feature/services/data/model/request/filter_query_params.dart';
 
+import '../../../../trys.dart';
 import '../../../categories/presentation/controller/category_controller.dart';
 
 // import 'package:go_fresha/feature/categories/presentation/controller/category_controller.dart';
@@ -36,10 +39,18 @@ class Categories extends StatelessWidget {
                                 onTap: () {
                                   print(reasult.data[index].id);
                                 },
-                                child: SizedBox(
-                                    height: 85,
-                                    child: CustomCachedNetworkImage(
-                                        reasult.data[index].image)),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.toNamed(Routes.servicesListingScreen,
+                                        arguments: FilterQueryParams(
+                                            category_Id: int.parse(
+                                                reasult.data[index].id)));
+                                  },
+                                  child: SizedBox(
+                                      height: 85,
+                                      child: CustomCachedNetworkImage(
+                                          responselist[index].image)),
+                                ),
                               )
                             ],
                           )
