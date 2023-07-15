@@ -27,7 +27,10 @@ class ServicesRepositoryImpl extends ServicesRepository {
         var data = jsonResponse['data'];
         print(result);
 
-        final serviceList = data.map((e) => ServiceModel.fromJson(e)).toList();
+        final serviceList =
+            data.map<ServiceModel>((e) => ServiceModel.fromJson(e));
+
+        // data.map((e) => ServiceModel.fromJson(e)).toList();
 
         return ApiResponse(data: serviceList);
       } catch (e) {

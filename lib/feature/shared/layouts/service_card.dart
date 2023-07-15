@@ -3,18 +3,44 @@ import 'package:go_fresha/core/presentation/widgets/base_widget.dart';
 import 'package:go_fresha/core/presentation/widgets/cached_network_image_builder.dart';
 import 'package:go_fresha/feature/categories/data/model/category.dart';
 
+import '../../services/data/model/response/service_model.dart';
+
 enum _ServiceCardType { small, large }
 
-class ServiceCard extends StatelessWidget {
-  final Category? categoryModel;
+class ServiceCard {
+  static _ServiceCard small(
+          {required ServiceModel serviceModel,
+          Function()? onCartButtonClick,
+          Function()? onWishListButtonClick}) =>
+      _ServiceCard(
+        serviceModel: serviceModel,
+        type: _ServiceCardType.small,
+        onCartButtonClick: onCartButtonClick,
+        onWishlistButtonClick: onWishListButtonClick,
+      );
+  static _ServiceCard large(
+      {required ServiceModel serviceModel,
+      Function()? oncartButtonClick,
+      Function()? onWishlistButtonClick}) {
+    return _ServiceCard(
+      serviceModel: serviceModel,
+      type: _ServiceCardType.large,
+      onCartButtonClick: oncartButtonClick,
+      onWishlistButtonClick: onWishlistButtonClick,
+    );
+  }
+}
+
+class _ServiceCard extends StatelessWidget {
+  final ServiceModel serviceModel;
   final Function()? onCartButtonClick;
   final Function()? onWishlistButtonClick;
   final Color? decorationColor;
   final _ServiceCardType? type;
 
-  const ServiceCard(
+  const _ServiceCard(
       {super.key,
-      required this.categoryModel,
+      required this.serviceModel,
       this.onCartButtonClick,
       this.onWishlistButtonClick,
       this.decorationColor,
@@ -44,17 +70,8 @@ class ServiceCard extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: type == _ServiceCardType.large ? 140 : 98,
-                    child:
-                        // Container(
-                        //   child: Image(
-                        //     image: NetworkImage(
-                        //         "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"),
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        // )
-
-                        CustomCachedNetworkImage(
-                      "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80",
+                    child: CustomCachedNetworkImage(
+                      serviceModel.image,
                       fit: BoxFit.cover,
                       IsCompleteUrl: false,
                     ),
@@ -67,14 +84,20 @@ class ServiceCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            categoryModel!.name,
+                            serviceModel.name,
+                            // categoryModel!.name,
                             style: theme.textTheme.bodyText2
                                 ?.copyWith(fontWeight: FontWeight.w600),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                           config.verticalSpaceVerySmall(),
-                          Text("500",style: theme.textTheme.bodyText1?.copyWith(color: theme.colorScheme.secondary,fontWeight: FontWeight.w600),),
+                          Text(
+                            "500",
+                            style: theme.textTheme.bodyText1?.copyWith(
+                                color: theme.colorScheme.secondary,
+                                fontWeight: FontWeight.w600),
+                          ),
                           config.verticalSpaceVerySmall()
                         ],
                       )),

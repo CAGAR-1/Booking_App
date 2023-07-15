@@ -13,6 +13,7 @@ import 'package:go_fresha/feature/home/presentation/widgets/home_carousal.dart';
 import 'package:go_fresha/feature/services/di/service_binding.dart';
 
 import '../../../feature/auth/di/auth_bindings.dart';
+import '../../../feature/services/presentation/service_listing/service_listing_screen.dart';
 import '../../../trys.dart';
 
 part 'app_routes.dart';
@@ -42,7 +43,9 @@ class AppPages {
         bindings: [CoreBindings(), AuthBindings(), HomeBindings()]),
     GetPage(
         name: _Paths.servicesListingScreen,
-        page: ()=>ListingScrensss(filterQueryParams: Get.arguments,),
+        page: () => ServiceListingScreen(
+              filterQueryParams: Get.arguments,
+            ),
         bindings: [CoreBindings(), AuthBindings(), HomeBindings()])
   ];
 }

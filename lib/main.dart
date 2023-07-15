@@ -7,10 +7,11 @@ import 'package:go_fresha/feature/shared/layouts/service_card.dart';
 
 void main() {
   runApp(GetMaterialApp(
-    home: ServiceCard(
-      categoryModel: null,
-    ),
-    // getPages: AppPages.routes,
+    // home: ServiceCard(
+    //     // categoryModel: null,
+    //     // categoryModel: null,
+    //     ),
+    getPages: AppPages.routes,
     initialRoute: AppPages.initial,
   ));
 }

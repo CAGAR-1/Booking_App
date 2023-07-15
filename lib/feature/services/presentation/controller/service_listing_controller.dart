@@ -10,6 +10,7 @@ class ServiceListingController extends GetxController {
   @override
   void onInit() {
     fetchServiceList(filterQueryParams);
+
     super.onInit();
   }
 
@@ -29,22 +30,23 @@ class ServiceListingController extends GetxController {
     serviceListResponse =
         await Get.find<ServicesRepository>().getAllServices(filterQueryParams);
 
-    if (serviceListResponse.hasData) {
-      if (filterData == true) serviceList.clear();
-
-      // serviceList.add(serviceListResponse.data);
-    }
     // if (serviceListResponse.hasData) {
     //   if (filterData == true) serviceList.clear();
-    //   for (dynamic data in serviceListResponse.data) {
-    //     if (data is Map<String, dynamic>) {
-    //       ServiceModel serviceModel = ServiceModel.fromJson(data);
-    //       serviceList.addAll(serviceListResponse.data);
-    //     }
-    //   }
-    // }
+
+    // serviceList.add(serviceListResponse.data);
+    serviceList.addAll(serviceListResponse.data);
   }
+  // if (serviceListResponse.hasData) {
+  //   if (filterData == true) serviceList.clear();
+  //   for (dynamic data in serviceListResponse.data) {
+  //     if (data is Map<String, dynamic>) {
+  //       ServiceModel serviceModel = ServiceModel.fromJson(data);
+  //       serviceList.addAll(serviceListResponse.data);
+  //     }
+  //   }
+  // }
 }
+// }
 
 
 //
