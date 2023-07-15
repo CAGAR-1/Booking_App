@@ -67,7 +67,7 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
                             child: Text("Sorry does not have any services"),
                           );
                         } else {
-                          return Text("Loading");
+                          return Center(child: CircularProgressIndicator());
                         }
                       })
                 ],
