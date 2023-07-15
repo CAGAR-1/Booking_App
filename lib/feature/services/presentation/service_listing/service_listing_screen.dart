@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:go_fresha/core/presentation/widgets/base_widget.dart';
+import 'package:go_fresha/core/utils/size_config.dart';
 import 'package:go_fresha/feature/services/data/model/request/filter_query_params.dart';
 import 'package:go_fresha/feature/services/presentation/controller/service_listing_controller.dart';
 import 'package:go_fresha/feature/services/presentation/service_listing/service_list_view.dart';
@@ -26,30 +27,54 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: GetBuilder<ServiceListingController>(
-          init: ServiceListingController(widget.filterQueryParams),
-          builder: (controller) {
-            return BaseWidget(builder: (context, config, theme) {
-              return Padding(
-                padding: EdgeInsets.only(
-                    top: config.appVerticalPaddingSmall(),
-                    left: config.appEdgePadding(),
-                    right: config.appEdgePadding(),
-                    bottom: config.appHeight(6)),
-                child: SingleChildScrollView(
-                  child:
-                      // Text(controller.serviceList.length.toString()
+        appBar: AppBar(),
+        body: BaseWidget(builder: (context, config, theme) {
+          return Padding(
+              padding: EdgeInsets.only(
+                  top: config.appVerticalPaddingSmall(),
+                  left: config.appEdgePadding(),
+                  right: config.appEdgePadding(),
+                  bottom: config.appHeight(6)),
+              child: Column(
+                children: [
+                  GetBuilder<ServiceListingController>(
+                      init: ServiceListingController(widget.filterQueryParams),
+                      builder: (controller) {
+                        final result = Get.find<ServiceListingController>()
+                            .serviceListResponse;
 
-                      // )
+                        if (result.hasData) {
+                          final serviceList = controller.serviceList;
 
-                      ServiceListViewBuilder(
-                          serviceList: controller.serviceList),
-                ),
-              );
-            });
-          }),
-      // body: GetBuilder(builder: ),
-    );
+                          return serviceList.isEmpty
+                              ? SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height / 1.9,
+                                  child: const Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                          "Sorry we cant find service matching the selection")
+                                    ],
+                                  ),
+                                )
+                              : SingleChildScrollView(
+                                  child: ServiceListViewBuilder(
+                                      serviceList: controller.serviceList),
+                                );
+                        } else if (result.hasError) {
+                          return Center(
+                            child: Text("Sorry does not have any services"),
+                          );
+                        } else {
+                          return Text("Loading");
+                        }
+                      })
+                ],
+              ));
+        })
+
+        // body: GetBuilder(builder: ),
+        );
   }
 }
