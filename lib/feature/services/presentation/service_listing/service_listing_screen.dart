@@ -38,6 +38,7 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
                   right: config.appEdgePadding(),
                   bottom: config.appHeight(6)),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   GetBuilder<ServiceListingController>(
                       init: ServiceListingController(widget.filterQueryParams),
