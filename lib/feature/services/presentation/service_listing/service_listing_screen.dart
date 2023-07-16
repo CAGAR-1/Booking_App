@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:go_fresha/core/presentation/widgets/base_widget.dart';
+import 'package:go_fresha/core/presentation/widgets/shimmer_widget.dart';
 import 'package:go_fresha/core/utils/size_config.dart';
 import 'package:go_fresha/feature/services/data/model/request/filter_query_params.dart';
 import 'package:go_fresha/feature/services/presentation/controller/service_listing_controller.dart';
@@ -67,7 +69,8 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
                             child: Text("Sorry does not have any services"),
                           );
                         } else {
-                          return Center(child: CircularProgressIndicator());
+                          return const SingleChildScrollView(
+                              child: LoadingServiceListView());
                         }
                       })
                 ],
@@ -76,5 +79,21 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
 
         // body: GetBuilder(builder: ),
         );
+  }
+}
+
+class LoadingServiceListView extends StatelessWidget {
+  const LoadingServiceListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StaggeredGrid.count(
+      crossAxisCount: 2,
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
+      children: List.generate(5, (index) {
+        return ShimmerWidget.rounded(height: 170, width: 130, borderradius: 10);
+      }),
+    );
   }
 }
