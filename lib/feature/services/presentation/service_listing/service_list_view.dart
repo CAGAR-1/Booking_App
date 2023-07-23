@@ -11,7 +11,7 @@ class ServiceListViewBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StaggeredGrid.count(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
         children: List.generate(serviceList.length, (index) {

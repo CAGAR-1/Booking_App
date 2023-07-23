@@ -54,18 +54,19 @@ class _ServiceCard extends StatelessWidget {
             top: config.appVerticalPaddingSmall(),
             left: config.appEdgePadding(),
             right: config.appEdgePadding(),
-            bottom: config.appHeight(5)),
+            bottom: config.appHeight(1)),
         child: Container(
           width: type == _ServiceCardType.large ? 150 : 150,
           decoration: BoxDecoration(
               border: Border.all(
                   color: decorationColor ?? Colors.grey.withOpacity(0.5)),
               borderRadius: BorderRadius.circular(4),
-              color: Colors.white),
-          child: Stack(
+              color: Colors.white.withOpacity(0.5)),
+          child: Row(
+            // mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
-                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
@@ -76,33 +77,107 @@ class _ServiceCard extends StatelessWidget {
                       IsCompleteUrl: false,
                     ),
                   ),
-                  config.verticalSpaceSmall(),
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: config.appHorizontalPaddingSmall()),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            serviceModel.name,
-                            // categoryModel!.name,
-                            style: theme.textTheme.bodyText2
-                                ?.copyWith(fontWeight: FontWeight.w600),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          config.verticalSpaceVerySmall(),
-                          Text(
-                            "500",
-                            style: theme.textTheme.bodyText1?.copyWith(
-                                color: theme.colorScheme.secondary,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          config.verticalSpaceVerySmall()
-                        ],
-                      )),
+                  Text("Price 500")
                 ],
-              )
+              ),
+              // config.verticalSpaceSmall(),
+              SizedBox(
+                width: config.appHorizontalPaddingMedium(),
+              ),
+              Expanded(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    serviceModel.name,
+                    // categoryModel!.name,
+                    style: theme.textTheme.bodyText2
+                        ?.copyWith(fontWeight: FontWeight.w600),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  // config.verticalSpaceVerySmall(),
+                  config.verticalSpaceSmall(),
+                  Text(
+                    serviceModel.description,
+                    style: theme.textTheme.bodyText1?.copyWith(
+                      color: Colors.grey.withOpacity(0.5),
+                      // fontWeight: FontWeight.w600
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                  ),
+                  config.verticalSpaceSmall(),
+                  Row(
+                    children: [
+                      Text("Shop Name : ",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              ?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold)),
+                      Expanded(
+                          child: Text(
+                        serviceModel.shopName,
+                        style: TextStyle(overflow: TextOverflow.ellipsis),
+                        maxLines: 2,
+                      ))
+                    ],
+                  ),
+
+                  config.verticalSpaceSmall(),
+                  Row(
+                    children: [
+                      Text("Shop Status : ",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              ?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold)),
+                      Expanded(
+                          child: Text(
+                        serviceModel.shopStatus,
+                        style: TextStyle(
+                            color: serviceModel.shopStatus == "open"
+                                ? Colors.green
+                                : Colors.red),
+                      ))
+                    ],
+                  ),
+                ],
+              )),
+              // Column(
+
+              // )
+
+              // Padding(
+              //     padding: EdgeInsets.symmetric(
+              //         horizontal: config.appHorizontalPaddingSmall()),
+              //     child: Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Text(
+              //           serviceModel.name,
+              //           // categoryModel!.name,
+              //           style: theme.textTheme.bodyText2
+              //               ?.copyWith(fontWeight: FontWeight.w600),
+              //           maxLines: 2,
+              //           overflow: TextOverflow.ellipsis,
+              //         ),
+              //         config.verticalSpaceVerySmall(),
+              //         Text(
+              //           serviceModel.description,
+              //           style: theme.textTheme.bodyText1?.copyWith(
+              //               color: theme.colorScheme.secondary,
+              //               fontWeight: FontWeight.w600),
+              //           overflow: TextOverflow.ellipsis,
+              //           maxLines: 2,
+              //         ),
+              //         config.verticalSpaceVerySmall()
+              //       ],
+              //     )),
             ],
           ),
         ),
