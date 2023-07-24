@@ -47,9 +47,7 @@ class _ServiceListingScreenState extends State<ServiceListingScreen> {
                         top: config.appVerticalPaddingSmall(),
                         left: config.appEdgePadding(),
                         right: config.appEdgePadding(),
-                        bottom: config.appHeight(6)
-                        
-                        ),
+                        bottom: config.appHeight(6)),
                     child: SmartRefresher(
                       controller: refreshController,
                       // onRefresh: ,
@@ -116,10 +114,10 @@ class LoadingServiceListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StaggeredGrid.count(
-      crossAxisCount: 2,
+      crossAxisCount: 1,
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
-      children: List.generate(5, (index) {
+      children: List.generate(4, (index) {
         return ShimmerWidget.rounded(height: 170, width: 130, borderradius: 10);
       }),
     );
