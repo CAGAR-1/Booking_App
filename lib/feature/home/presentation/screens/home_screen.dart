@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 const Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -68,17 +68,21 @@ class HomeScreen extends StatelessWidget {
                                     )
                                   ],
                                 ),
-                                config.verticalSpaceCustom(0.2),
+                                config.verticalSpaceMedium(),
+
+                                // config.verticalSpaceCustom(0.2),
                                 Text("Find and book best service",
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyLarge!
                                         .copyWith(
                                             color: Colors.white, fontSize: 20)),
-                                config.verticalSpaceSmall(),
+                                config.verticalSpaceMedium(),
+
                                 SearchBarContainer(
                                   onPressed: () {},
                                 ),
+                                config.verticalSpaceMedium(),
                               ],
                             )),
                       ],
