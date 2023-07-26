@@ -12,7 +12,5 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   @override
   Future<dynamic> getAllCategoreis() {
     return apiClient.get(APIPathHelper.homeAPIs(APIPath.category));
-
-    //
   }
 }

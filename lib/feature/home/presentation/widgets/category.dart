@@ -1,3 +1,4 @@
+import 'package:colour/colour.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_fresha/core/presentation/routes/app_pages.dart';
@@ -15,73 +16,114 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(),
-        body: GetBuilder<CategoryController>(builder: (contorller) {
-          final reasult = contorller.categoryApiResponse;
-          return SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: BaseWidget(builder: (context, config, theme) {
-              if (reasult.hasData) {
-                final responselist = reasult.data;
+    List colorss = [
+      Colour('#fd6c57'),
+      Colour('#007aff'),
+      Colour('#fe457c'),
+      Colour('#615dd9'),
+      Colour('#fe9654')
+    ];
+    int colorIndex = 0;
+    return GetBuilder<CategoryController>(builder: (contorller) {
+      final reasult = contorller.categoryApiResponse;
+      return BaseWidget(
+        builder: (context, config, theme) {
+          return Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Top Categories",
+                    style: theme.textTheme.bodyLarge
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "View All",
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold, color: Colors.grey),
+                  ),
+                ],
+              ),
+              config.verticalSpaceSmall(),
+              SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: BaseWidget(
+                  builder: (context, config, theme) {
+                    if (reasult.hasData) {
+                      final responselist = reasult.data;
 
-                return Row(
-                  children: List.generate(
-                      responselist.length,
-                      (index) => Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: config.appEdgePadding(),
-                              vertical: config.appHorizontalPaddingSmall()),
-                          child: Row(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  print(reasult.data[index].id);
-                                },
-                                child: InkWell(
+                      return Row(
+                        children: List.generate(responselist.length, (index) {
+                          Color color = colorss[colorIndex % colorss.length];
+                          colorIndex++;
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    config.appHorizontalPaddingMedium()),
+                            child: Column(
+                              children: [
+                                InkWell(
                                   onTap: () {
-                                    Get.toNamed(Routes.servicesListingScreen,
-                                        arguments: FilterQueryParams(
-                                            category_Id: int.parse(
-                                                reasult.data[index].id)));
+                                    print(reasult.data[index].id);
                                   },
-                                  child: SizedBox(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.toNamed(Routes.servicesListingScreen,
+                                          arguments: FilterQueryParams(
+                                            category_Id: int.parse(
+                                                reasult.data[index].id),
+                                          ));
+                                    },
+                                    child: SizedBox(
                                       height: 85,
-                                      child: CustomCachedNetworkImage(
-                                          responselist[index].image)),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: color,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CustomCachedNetworkImage(
+                                              responselist[index].image),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              )
-                            ],
-                          )
-
-                          // ListView.builder(
-                          //   scrollDirection: Axis.horizontal,
-                          //   itemCount: reasult.data.length,
-                          //   itemBuilder: (context, index) {
-                          //     return
-
-                          //     // Text(reasult.data[index].description);
-                          //   },
-                          // ),
-                          )),
-                );
-
-                //   Center(child: Text(responselist.length.toString()));
-              } else
-                return Center(child: Text("d"));
-            }),
+                                config.verticalSpaceSmall(),
+                                Text(
+                                  responselist[index].name,
+                                  style: theme.textTheme.bodyText2
+                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                      );
+                    } else {
+                      return Center(child: Text("d"));
+                    }
+                  },
+                ),
+              ),
+            ],
           );
+        },
+      );
 
-          // => Center(
-          //   child: Row(
-          //     children: [
-          //       if(reasult.hasData)
-          //       final List<Category> categoryList=reasult.data;
-          //     ],
-          //   ),
+      // => Center(
+      //   child: Row(
+      //     children: [
+      //       if(reasult.hasData)
+      //       final List<Category> categoryList=reasult.data;
+      //     ],
+      //   ),
 
-          //     )
-        }));
+      //     )
+    });
   }
 }

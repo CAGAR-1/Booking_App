@@ -31,6 +31,7 @@ class HomeCarousal extends StatelessWidget {
                         .map((slider) => InkWell(
                               onTap: () {
                                 print(slider.id);
+                            
                               },
                               child: CircularCachedNetworkImageBuilder(
                                 imageurl: slider.image,

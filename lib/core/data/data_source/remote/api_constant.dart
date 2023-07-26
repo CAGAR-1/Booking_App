@@ -11,7 +11,7 @@ enum APIPath {
 }
 
 class APIPathHelper {
-  static const String baseUrl = "http://192.168.1.4/go_fresha_backend";
+  static const String baseUrl = "http://192.168.1.1/go_fresha_backend";
   static String authAPIs(APIPath path, {String? keyword}) {
     switch (path) {
       case APIPath.login:

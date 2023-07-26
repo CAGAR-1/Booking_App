@@ -8,6 +8,7 @@ import 'package:go_fresha/feature/categories/di/category_binding.dart';
 import 'package:go_fresha/feature/dashboard/di/dashboard_bindings.dart';
 import 'package:go_fresha/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:go_fresha/feature/home/di/home_bindings.dart';
+import 'package:go_fresha/feature/home/presentation/screens/home_screen.dart';
 import 'package:go_fresha/feature/home/presentation/widgets/category.dart';
 import 'package:go_fresha/feature/home/presentation/widgets/home_carousal.dart';
 import 'package:go_fresha/feature/services/di/service_binding.dart';
@@ -20,27 +21,34 @@ part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
-  static const initial = Routes.categories;
+  static const initial = Routes.HomeScreen;
   static final routes = [
     GetPage(name: _Paths.login, page: LoginScreen.new, bindings: [
       CoreBindings(),
       AuthBindings(),
       LoginBindings(),
     ]),
-    GetPage(name: _Paths.dashboard, page: DashboardScreen.new, bindings: [
-      DashBoardBindings(),
+    // GetPage(name: _Paths.dashboard, page: DashboardScreen.new, bindings: [
+    //   DashBoardBindings(),
+    //   CoreBindings(),
+    //   AuthBindings(),
+    //   LoginBindings()
+    // ]),
+    // GetPage(
+    //     name: _Paths.categories,
+    //     page: Categories.new,
+    //     bindings: [CoreBindings(), CategoryBindings(), ServiceBinding()]),
+    // GetPage(
+    //     name: _Paths.carousal,
+    //     page: HomeCarousal.new,
+    //     bindings: [CoreBindings(), AuthBindings(), HomeBindings()]),
+
+    GetPage(name: _Paths.homescreen, page: HomeScreen.new, bindings: [
       CoreBindings(),
-      AuthBindings(),
-      LoginBindings()
+      CategoryBindings(),
+      ServiceBinding(),
+      HomeBindings()
     ]),
-    GetPage(
-        name: _Paths.categories,
-        page: Categories.new,
-        bindings: [CoreBindings(), CategoryBindings(), ServiceBinding()]),
-    GetPage(
-        name: _Paths.carousal,
-        page: HomeCarousal.new,
-        bindings: [CoreBindings(), AuthBindings(), HomeBindings()]),
     GetPage(
         name: _Paths.servicesListingScreen,
         page: () => ServiceListingScreen(
